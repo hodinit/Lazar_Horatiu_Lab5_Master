@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../RiskClasificationWebAPI/RiskClasificationWebAPI.csproj" />
+  <Project Path="Lazar_Horatiu_Lab5_Master.csproj" />
+</Solution>
