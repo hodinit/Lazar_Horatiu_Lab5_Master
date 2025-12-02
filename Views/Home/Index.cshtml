@@ -1,8 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Lazar_Horatiu_Lab5_Master.Models.RiskPredictionViewModel
+
+<h2>Risk Prediction</h2>
+
+<form asp-controller="RiskPrediction" asp-action="Index" method="post">
+    <div class="mb-3">
+        <label asp-for="InspectionType" class="form-label"></label>
+        <input asp-for="InspectionType" class="form-control" />
+        <span asp-validation-for="InspectionType" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ViolationDescription" class="form-label"></label>
+        <textarea asp-for="ViolationDescription" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="ViolationDescription" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Predict</button>
+</form>
+
+@* @if (!string.IsNullOrEmpty(Model?.PredictedRisk))
+{
+    <div class="alert alert-info mt-3" role="alert">
+        <strong>Predicted risk:</strong> @Model.PredictedRisk
+    </div>
+} *@
+
+<div>
+    @if (ViewBag.Message != null)
+    {
+        <h1>Result</h1>
+        <h2>Estimated :@ViewBag.Message</h2>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@* 
+{
+  "InspectionType": "Reinspection/Followup",
+  "ViolationDescription": "Inadequately cleaned or sanitized food contact surfaces"
+} 
+*@

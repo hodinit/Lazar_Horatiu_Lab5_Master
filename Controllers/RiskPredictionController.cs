@@ -1,6 +1,7 @@
 ﻿using Lazar_Horatiu_Lab5_Master.Models;
 using Lazar_Horatiu_Lab5_Master.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Lazar_Horatiu_Lab5_Master.Controllers
 {
@@ -12,22 +13,22 @@ namespace Lazar_Horatiu_Lab5_Master.Controllers
             _riskService = riskService;
         }
 
-        //GET: RiskPrediction/index
+        // GET: RiskPrediction/Index
         [HttpGet]
         public IActionResult Index()
         {
             var model = new RiskPredictionViewModel();
-            return View();
+            return View("~/Views/Home/Index.cshtml", model);
         }
 
-        //POST: RiskPrediction/index
+        // POST: RiskPrediction/Index
         [HttpPost]
         public async Task<IActionResult> Index(RiskPredictionViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("~/Views/Home/Index.cshtml", model);
+            //}
 
             var input = new RiskInput
             {
@@ -37,8 +38,9 @@ namespace Lazar_Horatiu_Lab5_Master.Controllers
 
             var prediction = await _riskService.PredictRiskAsync(input);
             model.PredictedRisk = prediction;
-            
-            return View(model);
+            ViewBag.Message = model.PredictedRisk;
+
+            return View("~/Views/Home/Index.cshtml", model);
         }
     }
 }

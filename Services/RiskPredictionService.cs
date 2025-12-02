@@ -22,6 +22,7 @@ namespace Lazar_Horatiu_Lab5_Master.Services
             response.EnsureSuccessStatusCode();
             var result = await response.Content.ReadFromJsonAsync<RiskApiResponse>();
             return result?.predictedLabel;
+            //Prediction
         }
 
         private class RiskApiResponse
